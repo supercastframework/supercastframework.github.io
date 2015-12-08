@@ -18,26 +18,11 @@
 <h2><a name="description">Description</a></h2>Filter and deliver multicast and unicast messages to clients.
 <h2><a name="index">Function Index</a></h2>
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#client_disconnect-1">client_disconnect/1</a></td><td>Cleanup client related states.</td></tr>
-<tr><td valign="top"><a href="#code_change-3">code_change/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#del_chan_subscriber-3">del_chan_subscriber/3*</a></td><td></td></tr>
-<tr><td valign="top"><a href="#del_subscriber-2">del_subscriber/2*</a></td><td></td></tr>
 <tr><td valign="top"><a href="#delete_channel-1">delete_channel/1</a></td><td>Remove channel.</td></tr>
-<tr><td valign="top"><a href="#get_acctrl-0">get_acctrl/0*</a></td><td></td></tr>
-<tr><td valign="top"><a href="#handle_call-3">handle_call/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#handle_cast-2">handle_cast/2</a></td><td></td></tr>
-<tr><td valign="top"><a href="#handle_info-2">handle_info/2</a></td><td></td></tr>
-<tr><td valign="top"><a href="#init-1">init/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#multicast_msg-2">multicast_msg/2</a></td><td>Send a message to all connected clients.</td></tr>
-<tr><td valign="top"><a href="#new_chan_subscriber-3">new_chan_subscriber/3*</a></td><td></td></tr>
-<tr><td valign="top"><a href="#send-2">send/2*</a></td><td></td></tr>
-<tr><td valign="top"><a href="#send-3">send/3*</a></td><td></td></tr>
-<tr><td valign="top"><a href="#send_clients-2">send_clients/2*</a></td><td></td></tr>
-<tr><td valign="top"><a href="#send_type-2">send_type/2*</a></td><td></td></tr>
-<tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td></td></tr>
 <tr><td valign="top"><a href="#subscribe_stage1-2">subscribe_stage1/2</a></td><td>First subscribe stage.</td></tr>
 <tr><td valign="top"><a href="#subscribe_stage2-2">subscribe_stage2/2</a></td><td>Second subscribe stage.</td></tr>
 <tr><td valign="top"><a href="#subscribe_stage3-2">subscribe_stage3/2</a></td><td>Third.</td></tr>
-<tr><td valign="top"><a href="#terminate-2">terminate/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#unicast_msg-2">unicast_msg/2</a></td><td>Send a message to a single client.</td></tr>
 <tr><td valign="top"><a href="#unsubscribe-2">unsubscribe/2</a></td><td>Unsubscribe client from channel.</td></tr>
 </table>
@@ -51,50 +36,10 @@
   Called by supercast_endpoint when the client disconnect.
   Result in removing the client state from all the initialized channels.</p>
 
-<h3 class="function"><a name="code_change-3">code_change/3</a></h3>
-<div class="spec">
-<p><tt>code_change(O, S, E) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="del_chan_subscriber-3">del_chan_subscriber/3 *</a></h3>
-<div class="spec">
-<p><tt>del_chan_subscriber(CState, Channel, Chans) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="del_subscriber-2">del_subscriber/2 *</a></h3>
-<div class="spec">
-<p><tt>del_subscriber(CState, Chans) -&gt; any()</tt></p>
-</div>
-
 <h3 class="function"><a name="delete_channel-1">delete_channel/1</a></h3>
 <div class="spec">
 <p><tt>delete_channel(Channel::string()) -&gt; ok</tt><br></p>
 </div><p>Remove channel.</p>
-
-<h3 class="function"><a name="get_acctrl-0">get_acctrl/0 *</a></h3>
-<div class="spec">
-<p><tt>get_acctrl() -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="handle_call-3">handle_call/3</a></h3>
-<div class="spec">
-<p><tt>handle_call(Call, F, State) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="handle_cast-2">handle_cast/2</a></h3>
-<div class="spec">
-<p><tt>handle_cast(Cast, State) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="handle_info-2">handle_info/2</a></h3>
-<div class="spec">
-<p><tt>handle_info(I, S) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="init-1">init/1</a></h3>
-<div class="spec">
-<p><tt>init(X1) -&gt; any()</tt></p>
-</div>
 
 <h3 class="function"><a name="multicast_msg-2">multicast_msg/2</a></h3>
 <div class="spec">
@@ -102,36 +47,6 @@
 </div><p>Send a message to all connected clients.
   Called by a supercast_channel module.
   Will be send depending of the permissions of the users.</p>
-
-<h3 class="function"><a name="new_chan_subscriber-3">new_chan_subscriber/3 *</a></h3>
-<div class="spec">
-<p><tt>new_chan_subscriber(CState, Channel, Chans) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="send-2">send/2 *</a></h3>
-<div class="spec">
-<p><tt>send(AllowedCL, Pdu) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="send-3">send/3 *</a></h3>
-<div class="spec">
-<p><tt>send(Rest, Pdu, Processed) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="send_clients-2">send_clients/2 *</a></h3>
-<div class="spec">
-<p><tt>send_clients(Pdu, Others) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="send_type-2">send_type/2 *</a></h3>
-<div class="spec">
-<p><tt>send_type(Pdu, Clients) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="start_link-0">start_link/0</a></h3>
-<div class="spec">
-<p><tt>start_link() -&gt; any()</tt></p>
-</div>
 
 <h3 class="function"><a name="subscribe_stage1-2">subscribe_stage1/2</a></h3>
 <div class="spec">
@@ -157,11 +72,6 @@
   Called by a channel after a supercast_mpd:subscribe_stage2/2 success.
   In fact, the client will really be subscribed here by the channel.</p>
 
-<h3 class="function"><a name="terminate-2">terminate/2</a></h3>
-<div class="spec">
-<p><tt>terminate(R, S) -&gt; any()</tt></p>
-</div>
-
 <h3 class="function"><a name="unicast_msg-2">unicast_msg/2</a></h3>
 <div class="spec">
 <p><tt>unicast_msg(Client_state::#client_state{}, X2::tuple()) -&gt; ok</tt><br></p>
@@ -181,6 +91,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Dec 8 2015, 19:39:55.</i></p>
+<p><i>Generated by EDoc, Dec 8 2015, 20:14:57.</i></p>
 </body>
 </html>
