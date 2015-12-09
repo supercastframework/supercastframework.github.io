@@ -1,0 +1,12 @@
+/* TEAM */
+    Conceptor:  ssbx@supercastframework.org
+    Site:       www.supercastframework.org/About
+    Location:   Bordeaux, France
+
+/* SITE */
+    Last update:    2015/12/09
+    Language:       English
+    Doctype:        HTML5
+    Standards:      HTML5, CSS3
+    Components:     Bootstrap
+    Software:       Nanoc, git, GitHub pages
