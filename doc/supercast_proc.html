@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module supercast_proc</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module supercast_proc</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>   
+This module describe the implementation of a supercast_proc module (ie   
+supercast_channel).
+<p>Copyright © (C) 2015, Sebastien Serre</p>
+
+<p><b>This module defines the <tt>supercast_proc</tt> behaviour.</b><br> Required callback functions: <tt>join_request/4</tt>, <tt>leave_request/4</tt>, <tt>info_request/3</tt>.</p>
+<p><b>Authors:</b> Sebastien Serre (<a href="mailto:ssbx@supercastframework.org"><tt>ssbx@supercastframework.org</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2><p>   
+This module describe the implementation of a supercast_proc module (ie   
+supercast_channel). It is here for users who wish to extent their own   
+application process to become supercast_proc channels.</p>
+  
+   <p>A supercast_proc module must export join_request, leave_request and   
+info_request. All functions of this module must be called from the same   
+process to insure a predictable message order arrival on the client side.</p>
+  
+  
+   <h4>join_request/4</h4><p>   
+This call is triggered when a client has requested and is allowed to   
+join to the channel.</p>
+  
+   <p><em>Args</em> is the term set at supercast_proc:new_channel/4.</p>
+  
+   <p>A call to this function MUST include a supercast_proc:join_accept/1-2 or   
+supercast_proc:join_refuse/1.</p>
+  
+   <p>A well behaving proc should eather reply as soon as possible
+   (ie: gen_server:cast/2) or raise an exception wich will send a subscribeErr
+   to the client (ie: the channel does not exists).
+   See <em>supercast_channel</em> implementation.</p>
+  
+   <p>The return value of the function is ignored.</p>
+  
+   <h4>leave_request/4</h4><p>   
+Called when a client leave the channel either on socket close or   
+unsubscribe call.</p>
+  
+   <p>A call to this function MUST include a supercast_proc:leave_ack/1-2</p>
+  
+   <p>A well behaving proc should reply as soon as possible ie: gen_server:cast/2</p>
+  
+   <p>See <em>supercast_channel</em> implementation.</p>
+  
+   <p>The return value of the function is ignored.</p>
+  
+   <h4>info_request/4</h4><p>   
+Used for communicate with the channel process .</p>
+  
+   See <em>supercast_channel</em> implementation.
+  
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#delete_channel-1">delete_channel/1</a></td><td>
+  Delete a registered channel.</td></tr>
+<tr><td valign="top"><a href="#info_request-2">info_request/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#join_accept-1">join_accept/1</a></td><td>Equivalent to <a href="#join_ack-2"><tt>join_ack(Ref, [])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#join_accept-2">join_accept/2</a></td><td>
+  Must be called from <em>supercast_proc:join/3</em> to effectively
+  subscribe the client to the channel.</td></tr>
+<tr><td valign="top"><a href="#join_refuse-1">join_refuse/1</a></td><td>
+  Must be called from <em>supercast_proc:join_request/3</em> to cancel the user
+  request to join the channel.</td></tr>
+<tr><td valign="top"><a href="#leave_ack-1">leave_ack/1</a></td><td>Equivalent to <a href="#leave_ack-2"><tt>leave_ack(Ref, [])</tt></a>.
+</td></tr>
+<tr><td valign="top"><a href="#leave_ack-2">leave_ack/2</a></td><td>
+  Must be called from <em>supercast_proc:leave_request/3</em> to effectively
+  unsubscribe the client to the channel.</td></tr>
+<tr><td valign="top"><a href="#new_channel-4">new_channel/4</a></td><td>  
+Register a new channel.</td></tr>
+<tr><td valign="top"><a href="#send_broadcast-2">send_broadcast/2</a></td><td>
+  Send messages to all clients of the specified channel.</td></tr>
+<tr><td valign="top"><a href="#send_multicast-3">send_multicast/3</a></td><td>
+  Send messages to all clients of the specified channel, wich satisfy with the
+  <em>read</em> permission of the #perm_conf{}.</td></tr>
+<tr><td valign="top"><a href="#send_unicast-2">send_unicast/2</a></td><td>
+  Send messages directly to a client.</td></tr>
+<tr><td valign="top"><a href="#send_unicast-3">send_unicast/3</a></td><td>
+  Actualy equal to send_unicast/2.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="delete_channel-1">delete_channel/1</a></h3>
+<div class="spec">
+<p><tt>delete_channel(Channel::string()) -&gt; ok</tt><br></p>
+</div><p>
+  Delete a registered channel.</p>
+<p><b><font color="red">To do</font></b><ul><li><font color="red">send a channel vanished message
+ </font></li></ul></p>
+
+<h3 class="function"><a name="info_request-2">info_request/2</a></h3>
+<div class="spec">
+<p><tt>info_request(Name, Request) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="join_accept-1">join_accept/1</a></h3>
+<div class="spec">
+<p><tt>join_accept(Ref::<a href="supercast.html#type-sc_reference">supercast:sc_reference()</a>) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <a href="#join_ack-2"><tt>join_ack(Ref, [])</tt></a>.</p>
+
+
+<h3 class="function"><a name="join_accept-2">join_accept/2</a></h3>
+<div class="spec">
+<p><tt>join_accept(Ref::<a href="supercast.html#type-sc_reference">supercast:sc_reference()</a>, Pdus::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>]) -&gt; ok</tt><br></p>
+</div><p>
+  Must be called from <em>supercast_proc:join/3</em> to effectively
+  subscribe the client to the channel.
+ </p>
+<p><b>See also:</b> <a href="#join_refuse-1">join_refuse/1</a>.</p>
+
+<h3 class="function"><a name="join_refuse-1">join_refuse/1</a></h3>
+<div class="spec">
+<p><tt>join_refuse(Ref::<a href="supercast.html#type-sc_reference">supercast:sc_reference()</a>) -&gt; ok</tt><br></p>
+</div><p>
+  Must be called from <em>supercast_proc:join_request/3</em> to cancel the user
+  request to join the channel. It notify the client with  a
+  <em>subscribeErr</em> message.
+ </p>
+<p><b>See also:</b> <a href="#join_accept-2">join_accept/2</a>.</p>
+
+<h3 class="function"><a name="leave_ack-1">leave_ack/1</a></h3>
+<div class="spec">
+<p><tt>leave_ack(Ref::<a href="supercast.html#type-sc_reference">supercast:sc_reference()</a>) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <a href="#leave_ack-2"><tt>leave_ack(Ref, [])</tt></a>.</p>
+
+
+<h3 class="function"><a name="leave_ack-2">leave_ack/2</a></h3>
+<div class="spec">
+<p><tt>leave_ack(Ref::<a href="supercast.html#type-sc_reference">supercast:sc_reference()</a>, Pdus::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>]) -&gt; ok</tt><br></p>
+</div><p>
+  Must be called from <em>supercast_proc:leave_request/3</em> to effectively
+  unsubscribe the client to the channel.
+ </p>
+
+<h3 class="function"><a name="new_channel-4">new_channel/4</a></h3>
+<div class="spec">
+<p><tt>new_channel(ChanName::string(), Module::atom(), Opts::any(), Perm::#perm_conf{}) -&gt; ok</tt><br></p>
+</div><p><p>  
+Register a new channel.</p>
+ 
+  <p><em>ChanName</em> is the name of the channel.</p>
+ 
+  <p><em>Module</em> is the name of the module implementing the supercast_proc  
+behaviour.</p>
+ 
+  <em>Opts</em> is any term passed to supercast callbacks.</p>
+<p><b>See also:</b> <a href="supercast_proc.html#join_ack-3">supercast_proc:join_ack/3</a>, <a href="supercast_proc.html#leave_ack-1"><em>Perm</em> is the permissions of the channel. Only read is handled by
+  supercast.
+ </a>.</p>
+
+<h3 class="function"><a name="send_broadcast-2">send_broadcast/2</a></h3>
+<div class="spec">
+<p><tt>send_broadcast(Channel::string(), Message::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>]) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <a href="#multicast-3"><tt>multicast(Channel, Messages, default)</tt></a>.</p>
+<p>
+  Send messages to all clients of the specified channel.
+ </p>
+<p><b>See also:</b> <a href="#multicast-3">multicast/3</a>.</p>
+
+<h3 class="function"><a name="send_multicast-3">send_multicast/3</a></h3>
+<div class="spec">
+<p><tt>send_multicast(Channel::string(), Messages::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>], CustomPerm::default | #perm_conf{}) -&gt; ok</tt><br></p>
+</div><p>
+  Send messages to all clients of the specified channel, wich satisfy with the
+  <em>read</em> permission of the #perm_conf{}.
+ </p>
+<p><b>See also:</b> <a href="#send_multicast-2">send_multicast/2</a>, <a href="#send_unicast-3">send_unicast/3</a>.</p>
+
+<h3 class="function"><a name="send_unicast-2">send_unicast/2</a></h3>
+<div class="spec">
+<p><tt>send_unicast(CState::#client_state{}, Messages::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>]) -&gt; ok</tt><br></p>
+</div><p>
+  Send messages directly to a client.
+ </p>
+
+<h3 class="function"><a name="send_unicast-3">send_unicast/3</a></h3>
+<div class="spec">
+<p><tt>send_unicast(_Channel::string(), CState::#client_state{}, Messages::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>]) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <tt>unicast / 2</tt>.</p>
+<p>
+  Actualy equal to send_unicast/2.</p>
+<p><b><font color="red">To do</font></b><ul><li><font color="red">insert Channel in pdu
+ </font></li></ul></p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jul 29 2016, 22:59:10.</i></p>
+</body>
+</html>

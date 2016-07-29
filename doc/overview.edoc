@@ -1,0 +1,11 @@
+** this is the overview.doc file for the application 'supercast' **
+
+@author Sebastien Serre <ssbx@supercastframework.org>
+@copyright 2012-2016 Sebastien Serre
+@version {@version}
+@title Supercast Documentation
+@doc `supercast' is an application framework introducing the concept of
+'channels' to facilitate the creation of soft real time user interfaces.
+@TODO Dynamics channels on pattern matching (will allow per user channel creation).
+@TODO Use ssl or/and secure authentication mechanism
+@TODO Serious tests

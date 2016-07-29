@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module supercast</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module supercast</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+   Suercast high level API.
+<p>Copyright © (C) 2015, Sebastien Serre</p>
+
+<p><b>Authors:</b> Sebastien Serre (<a href="mailto:ssbx@supercastframework.org"><tt>ssbx@supercastframework.org</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>
+   Suercast high level API.
+  
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-sc_message">sc_message()</a></h3>
+<p><tt>sc_message() = <a href="jsx.html#type-json_term">jsx:json_term()</a></tt></p>
+
+
+<h3 class="typedecl"><a name="type-sc_queryid">sc_queryid()</a></h3>
+<p><tt>sc_queryid() = integer() | undefined</tt></p>
+
+
+<h3 class="typedecl"><a name="type-sc_reference">sc_reference()</a></h3>
+<p><tt>sc_reference() = {Channel::string(), CState::#client_state{}, QueryId::<a href="#type-sc_queryid">sc_queryid()</a>}</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#emit-2">emit/2</a></td><td>  
+Send messages to all clients.</td></tr>
+<tr><td valign="top"><a href="#emit-3">emit/3</a></td><td>  
+Send messages to clients satisfying to permissions condition.</td></tr>
+<tr><td valign="top"><a href="#info_request-2">info_request/2</a></td><td>Equivalent to <tt>supercast_proc:cast / 4</tt>.
+</td></tr>
+<tr><td valign="top"><a href="#listen-0">listen/0</a></td><td>
+  Start listening for incomming client connexions.</td></tr>
+<tr><td valign="top"><a href="#new-4">new/4</a></td><td>Equivalent to <tt>supercast_channel:new / 4</tt>.
+</td></tr>
+<tr><td valign="top"><a href="#satisfy-2">satisfy/2</a></td><td>
+  Return true if the user is allowed to read the ressource.</td></tr>
+<tr><td valign="top"><a href="#send-3">send/3</a></td><td>  
+Send messages to one client.</td></tr>
+<tr><td valign="top"><a href="#start-0">start/0</a></td><td>
+  This is an debug utility automaticaly calling supercast:listen().</td></tr>
+<tr><td valign="top"><a href="#stop-0">stop/0</a></td><td>
+  Stop the supercast server.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="emit-2">emit/2</a></h3>
+<div class="spec">
+<p><tt>emit(Channel::string(), Messages::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>]) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <tt>supercast_proc:send_broadcast / 2</tt>.</p>
+<p><p>  
+Send messages to all clients.</p>
+ 
+  WARNING:
+  This function must be called uniquely from the process owning the channel
+  (ie from one of the supercast_channel callbacks),
+  to insure that the messages emited or sent will arrive at the same order to
+  the client side.
+ </p>
+
+<h3 class="function"><a name="emit-3">emit/3</a></h3>
+<div class="spec">
+<p><tt>emit(Channel::string(), Messages::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>], Perm::#perm_conf{}) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <tt>supercast_proc:send_multicast / 3</tt>.</p>
+<p><p>  
+Send messages to clients satisfying to permissions condition.</p>
+ 
+  WARNING:
+  This function must be called uniquely from the process owning the channel
+  (ie from one of the supercast_channel callbacks),
+  to insure that the messages emited or sent will arrive at the same order to
+  the client side.
+ </p>
+
+<h3 class="function"><a name="info_request-2">info_request/2</a></h3>
+<div class="spec">
+<p><tt>info_request(Name::string(), Request::term()) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <tt>supercast_proc:cast / 4</tt>.</p>
+
+
+<h3 class="function"><a name="listen-0">listen/0</a></h3>
+<div class="spec">
+<p><tt>listen() -&gt; ok</tt><br></p>
+</div><p>
+  Start listening for incomming client connexions.
+ </p>
+
+<h3 class="function"><a name="new-4">new/4</a></h3>
+<div class="spec">
+<p><tt>new(Name::string(), Module::atom(), Args::term(), Perm::#perm_conf{}) -&gt; {error, any()} | {ok, undefined | pid()} | {ok, undefined | pid(), term()}</tt><br></p>
+</div><p>Equivalent to <tt>supercast_channel:new / 4</tt>.</p>
+
+
+<h3 class="function"><a name="satisfy-2">satisfy/2</a></h3>
+<div class="spec">
+<p><tt>satisfy(CState::#client_state{}, Perm::#perm_conf{}) -&gt; true | false</tt><br></p>
+</div><p>
+  Return true if the user is allowed to read the ressource.
+ </p>
+
+<h3 class="function"><a name="send-3">send/3</a></h3>
+<div class="spec">
+<p><tt>send(Channel::string(), CState::#client_state{}, Messages::[<a href="supercast.html#type-sc_message">supercast:sc_message()</a>]) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <tt>supercast_proc:send_unicast / 3</tt>.</p>
+<p><p>  
+Send messages to one client.</p>
+ 
+  WARNING:
+  This function must be called uniquely from the process owning the channel
+  (ie from one of the supercast_channel callbacks),
+  to insure that the messages emited or sent will arrive at the same order to
+  the client side.
+ </p>
+
+<h3 class="function"><a name="start-0">start/0</a></h3>
+<div class="spec">
+<p><tt>start() -&gt; ok</tt><br></p>
+</div><p>
+  This is an debug utility automaticaly calling supercast:listen().
+ </p>
+
+<h3 class="function"><a name="stop-0">stop/0</a></h3>
+<div class="spec">
+<p><tt>stop() -&gt; ok</tt><br></p>
+</div><p>
+  Stop the supercast server.
+ </p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jul 29 2016, 22:59:10.</i></p>
+</body>
+</html>

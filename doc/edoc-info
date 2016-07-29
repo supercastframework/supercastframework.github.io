@@ -1,0 +1,7 @@
+%% encoding: UTF-8
+{application,supercast}.
+{packages,[]}.
+{modules,[supercast,supercast_acctrl,supercast_acctrl_rbac,supercast_auth,
+          supercast_auth_dev,supercast_auth_xml,supercast_channel,
+          supercast_controller,supercast_encoder,supercast_endpoint,
+          supercast_endpoint_tcp,supercast_endpoint_websocket,supercast_proc]}.
