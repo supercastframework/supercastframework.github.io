@@ -1,5 +1,5 @@
 # www.robotstxt.org/
 # Allow crawling of all content
-Sitemaps: http://www.supercastframework.org/sitemaps.xml
+Sitemaps: http://supercastframework.github.io/sitemaps.xml
 User-agent: *
 Disallow:

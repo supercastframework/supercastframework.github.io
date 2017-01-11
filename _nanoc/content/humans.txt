@@ -3,8 +3,8 @@ changefreq: yearly
 priority: 0.1
 ---
 /* TEAM */
-    Conceptor:  ssbx@supercastframework.org
-    Site:       www.supercastframework.org/About
+    Conceptor:  ssbx@sysmo.io
+    Site:       supercastframework.github.io/About
     Location:   Bordeaux, France
 
 /* SITE */
